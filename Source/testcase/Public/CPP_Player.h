@@ -74,10 +74,6 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Reference|Curve")
 	class UCurveFloat* CrouchCurve;
 
-	//—§‚Â—p‚ÌCurve
-	UPROPERTY(EditAnywhere, Category = "Reference|Curve")
-	class UCurveFloat* StandCurve;
-
 	//FallVelocity
 	UPROPERTY(EditAnywhere, Category = "Reference|Variable")
 	float FallVelocity;

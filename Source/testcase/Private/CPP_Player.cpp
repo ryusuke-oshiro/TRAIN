@@ -104,13 +104,6 @@ ACPP_Player::ACPP_Player()
 		CrouchTimeLine->AddInterpFloat(CrouchCurve, CrouchStepFunc);
 	}
 
-	// カーブアセットの取得
-	const ConstructorHelpers::FObjectFinder<UCurveFloat> FindStandCurve(TEXT("/Game/TRAIN/Core/Characters/CF_Stand.CF_Stand"));
-	if (FindStandCurve.Succeeded())
-	{
-		StandCurve = FindStandCurve.Object;
-	}
-
 	//タイムラインの作成
 	StandTimeLine = CreateDefaultSubobject<UTimelineComponent>(TEXT("StandTimeline"));
 	if (StandTimeLine)
@@ -118,7 +111,7 @@ ACPP_Player::ACPP_Player()
 		// タイムライン更新時に呼び出されるメソッドの定義
 		FOnTimelineFloat StandStepFunc;
 		StandStepFunc.BindUFunction(this, TEXT("Stand"));
-		StandTimeLine->AddInterpFloat(StandCurve, StandStepFunc);
+		StandTimeLine->AddInterpFloat(CrouchCurve, StandStepFunc);
 	}
 }
 
