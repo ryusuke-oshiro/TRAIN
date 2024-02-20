@@ -38,6 +38,9 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = "Reference|Components")
 	class UCapsuleComponent* CapsuleCollision;
 
+	UPROPERTY(VisibleAnywhere, Category = "Reference|Components")
+	class USpringArmComponent* SpringArm;
+
 	//Camera
 	UPROPERTY(VisibleAnywhere, Category = "Components/Camera")
 	class UCameraComponent* Camera;
@@ -54,6 +57,14 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Reference|Input")
 	class UInputAction* CrouchInput;
 
+	//InteractInput
+	UPROPERTY(EditAnywhere, Category = "Reference|Input")
+	class UInputAction* InteractInput;
+
+	//ZoomInput
+	UPROPERTY(EditAnywhere, Category = "Reference|Input")
+	class UInputAction* ZoomInput;
+
 	//LookInput
 	UPROPERTY(EditAnywhere, Category = "Reference|Input")
 	class UInputAction* LookInput;
@@ -66,13 +77,17 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Reference|TimeLine")
 	class UTimelineComponent* CrouchTimeLine;
 
-	//立つ用のTimeLine
-	UPROPERTY(EditAnywhere, Category = "Reference|TimeLine")
-	class UTimelineComponent* StandTimeLine;
-
 	//しゃがみ用のCurve
 	UPROPERTY(EditAnywhere, Category = "Reference|Curve")
 	class UCurveFloat* CrouchCurve;
+
+	//Zoom用のTimeLine
+	UPROPERTY(EditAnywhere, Category = "Reference|TimeLine")
+	class UTimelineComponent* ZoomTimeLine;
+
+	//Zoom用のCurve
+	UPROPERTY(EditAnywhere, Category = "Reference|Curve")
+	class UCurveFloat* ZoomCurve;
 
 	//FallVelocity
 	UPROPERTY(EditAnywhere, Category = "Reference|Variable")
@@ -86,13 +101,13 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Reference|Variable")
 	FVector StandLocation;
 
+	//立つ状態か
+	UPROPERTY(EditAnywhere, Category = "Reference|Variable")
+	bool IsStand;
+
 	//カプセルの高さ
 	UPROPERTY(EditAnywhere, Category = "Reference|Variable")
-	float HalfHeight;
-
-	//カメラのZ座標
-	UPROPERTY(EditAnywhere, Category = "Reference|Variable")
-	float CameraLocationZ;
+	float CapsuleHalfHeight;
 private:
 	//落下処理
 	void Falling(const float& DeltaTime);
@@ -106,13 +121,23 @@ private:
 	//しゃがみ終了
 	void EndCrouch(const FInputActionValue& Value);
 
-	//しゃがむ
+	//しゃがみ
 	UFUNCTION()
 	void Crouch(const float& Value);
 
-	//立つ
+	//インタラクト
+	void Interact(const FInputActionValue& Value);
+
+	//ズームの開始
+	void BeginZoom(const FInputActionValue& Value);
+
+	//ズームの終了
+	void EndZoom(const FInputActionValue& Value);
+
+	//ズーム
 	UFUNCTION()
-	void Stand(const float& Value);
+	void Zoom(const float& Value);
+
 
 	//視点移動
 	void Look(const FInputActionValue & Value);
