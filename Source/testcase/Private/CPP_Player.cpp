@@ -38,7 +38,7 @@
 #define INTERACT_LENGTH 150
 
 //ズーム時のスプリングアームの距離
-#define ZOOM_SPRING_ARM_LENGHT -300.0
+#define ZOOM_SPRING_ARM_LENGHT -400.0
 
 // Sets default values
 ACPP_Player::ACPP_Player()
@@ -69,9 +69,9 @@ ACPP_Player::ACPP_Player()
 	SpringArm->TargetArmLength = 0.0f;
 	//初期値の設定
 	SpringArm->SetRelativeLocation(FVector(0.f, 0.f, STAND_CAMERA_Z));
+
 	//コントローラーの回転を参照する
 	SpringArm->bUsePawnControlRotation = true;
-
 	// カメラの作成
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("CameraComponent"));
 	//RootComponentにアタッチ
